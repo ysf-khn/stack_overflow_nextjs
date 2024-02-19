@@ -30,6 +30,7 @@ export async function createUser(userData: CreateUserParams) {
 
     const newUser = await User.create(userData);
 
+    console.log("user created");
     return newUser;
   } catch (error) {
     console.log(error);
@@ -46,7 +47,7 @@ export async function updateUser(params: UpdateUserParams) {
     await User.findOneAndUpdate({ clerkId }, updateData, {
       new: true,
     });
-
+    console.log("user updated");
     revalidatePath(path);
   } catch (error) {
     console.log(error);
