@@ -104,15 +104,3 @@ export async function deleteUser(params: DeleteUserParams) {
     throw error;
   }
 }
-
-export async function getTags(params: GetUserByIdParams) {
-  try {
-    connectDB();
-
-    const tags = ["html", "css", "javascript"];
-    return tags;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
