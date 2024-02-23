@@ -6,6 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getTimestamp = (createdAt: Date): string => {
+  let output = null;
+  let count = 0;
   const now = new Date();
   const diff = now.getTime() - createdAt.getTime();
 
@@ -23,14 +25,15 @@ export const getTimestamp = (createdAt: Date): string => {
   // Find the largest unit that fits the time difference
   const unit = units.find((u) => diff >= u.ms);
 
-  // Calculate the number of units
-  const count = Math.floor(diff / unit!.ms);
+  if (unit) {
+    // Calculate the number of units
+    count = Math.floor(diff / unit!.ms);
 
-  // Create the output string
-  const output = `${count} ${unit!.name}${count > 1 ? "s" : ""}`;
-
+    // Create the output string
+    output = `${count} ${unit!.name}${count > 1 ? "s" : ""}`;
+  }
   // Handle situations where time difference is very small
-  if (count === 0 && diff > 0) {
+  else if (count === 0 && diff > 0) {
     return "Just now";
   }
 
