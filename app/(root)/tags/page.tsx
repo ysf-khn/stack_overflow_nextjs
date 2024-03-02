@@ -3,11 +3,14 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/navbar/search/LocalSearchbar";
 import { TagFilters } from "@/constants/filters";
 import { getAllTags } from "@/lib/actions/tag.action";
+import { SearchParamsProps } from "@/types";
 import { Divide } from "lucide-react";
 import Link from "next/link";
 
-const Page = async () => {
-  const result = await getAllTags({});
+const Page = async ({ searchParams }: SearchParamsProps) => {
+  const result = await getAllTags({
+    searchQuery: searchParams.q,
+  });
 
   return (
     <>
@@ -32,7 +35,7 @@ const Page = async () => {
           result.tags.map((tag) => (
             <Link
               key={tag._id}
-              href={`/tags/${tag._id}}`}
+              href={`/tags/${tag._id}`}
               className="shadow-light100_darknone"
             >
               <article className="background-light900_dark200 light-border flex w-full flex-col rounded-2xl border px-8 py-10 sm:w-[260px]">

@@ -22,10 +22,21 @@ export async function getUsers(params: GetAllUsersParams) {
   try {
     connectDB();
 
+    const { searchQuery } = params;
+
+    const query: FilterQuery<typeof User> = {};
+
+    if (searchQuery) {
+      query.$or = [
+        { name: { $regex: new RegExp(searchQuery, "i") } },
+        { username: { $regex: new RegExp(searchQuery, "i") } },
+      ];
+    }
+
     // const { page = 1, pageSize = 20, filter, searchQuery } = params;
     // page=1 & pageSize=20 are default values if not specified
 
-    const users = await User.find({}).sort({ createdAt: -1 });
+    const users = await User.find(query).sort({ createdAt: -1 });
     return { users };
   } catch (error) {
     console.log(error);
@@ -175,7 +186,16 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
   try {
     connectDB();
 
-    const { clerkId, page = 1, pageSize = 10, filter, searchQuery } = params;
+    const { clerkId, searchQuery } = params;
+
+    
+    // const query: FilterQuery<typeof Question> = {};
+    // if (searchQuery) {
+    //   query.$or = [
+    //     { title: { $regex: new RegExp(searchQuery, "i") } },
+    //     { content: { $regex: new RegExp(searchQuery, "i") } },
+    //   ];
+    // }
 
     const query: FilterQuery<typeof Question> = searchQuery
       ? { title: { $regex: new RegExp(searchQuery, "i") } }
@@ -245,4 +265,3 @@ export async function getUserAnswers(params: GetUserStatsParams) {
     throw error;
   }
 }
-
