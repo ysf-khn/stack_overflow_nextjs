@@ -81,8 +81,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
       );
 
       const aiAnswer = await res.json();
-      // alert(JSON.stringify(aiAnswer));
-      // alert(aiAnswer.reply);
 
       const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br/>");
 
