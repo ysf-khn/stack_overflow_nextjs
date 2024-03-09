@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect } from "react";
 
@@ -33,14 +33,11 @@ interface Props {
 }
 
 const ParseHTML = ({ data }: Props) => {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
-useEffect(()=>{
-    Prism.highlightAll()
-},[])
-
-  return <div>
-    {parse(data)}
-  </div>;
+  return <div className="markdown w-full min-w-full">{parse(data)}</div>;
 };
 
 export default ParseHTML;

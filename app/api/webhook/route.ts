@@ -53,13 +53,12 @@ export async function POST(req: Request) {
 
   // Get the ID and type
   const eventType = evt.type;
-  console.log({eventType})
+  console.log({ eventType });
 
   if (eventType === "user.created") {
     // get all user data from event
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
-
 
     // server action to create new user in db
     const mongoUser = await createUser({
@@ -78,8 +77,14 @@ export async function POST(req: Request) {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
 
-      console.log(id,email_addresses,image_url,username,first_name,last_name);
-
+    console.log(
+      id,
+      email_addresses,
+      image_url,
+      username,
+      first_name,
+      last_name
+    );
 
     // create new user in db
     const mongoUser = await updateUser({
@@ -106,5 +111,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
-  return new Response("", { status: 200 });
+  return NextResponse.json({ message: "OK" });
 }
