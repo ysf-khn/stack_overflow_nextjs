@@ -5,7 +5,6 @@ import LocalSearchbar from "@/components/shared/navbar/search/LocalSearchbar";
 import { TagFilters } from "@/constants/filters";
 import { getAllTags } from "@/lib/actions/tag.action";
 import { SearchParamsProps } from "@/types";
-import { Divide } from "lucide-react";
 import Link from "next/link";
 
 const Page = async ({ searchParams }: SearchParamsProps) => {

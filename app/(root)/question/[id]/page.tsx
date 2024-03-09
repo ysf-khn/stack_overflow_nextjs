@@ -12,7 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const Page = async ({ params, searchParams }) => {
+const Page = async ({ params, searchParams }:any) => {
   // const question = await getQuestionById(params.id) . I was doing this, but was not quite right  coz I didn't change the name of the argument to be questionId which was expected there
   const result = await getQuestionById({ questionId: params.id });
   const { userId: clerkId } = auth();

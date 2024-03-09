@@ -4,7 +4,7 @@ import Image from "next/image";
 
 interface StatsCardProps {
   imgUrl: string;
-  value: number;
+  value: number | undefined;
   title: string;
 }
 
@@ -22,9 +22,9 @@ const StatsCard = ({ imgUrl, value, title }: StatsCardProps) => {
 };
 
 interface Props {
-  totalQuestions: number;
-  totalAnswers: number;
-  badges: BadgeCounts;
+  totalQuestions: number | undefined;
+  totalAnswers: number | undefined;
+  badges: BadgeCounts | undefined;
   reputation:number;
 }
 
@@ -51,19 +51,19 @@ const Stats = ({ totalQuestions, totalAnswers, badges,reputation }: Props) => {
 
         <StatsCard
           imgUrl="/assets/icons/gold-medal.svg"
-          value={badges.GOLD}
+          value={badges?.GOLD}
           title="Gold Badges"
         />
 
         <StatsCard
           imgUrl="/assets/icons/silver-medal.svg"
-          value={badges.SILVER}
+          value={badges?.SILVER}
           title="Silver Badges"
         />
 
         <StatsCard
           imgUrl="/assets/icons/bronze-medal.svg"
-          value={badges.BRONZE}
+          value={badges?.BRONZE}
           title="Bronze Badges"
         />
       </div>
